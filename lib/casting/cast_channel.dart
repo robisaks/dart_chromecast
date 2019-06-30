@@ -31,7 +31,7 @@ abstract class CastChannel {
     castMessage.sourceId = _sourceId;
     castMessage.destinationId = _destinationId;
     castMessage.namespace = _namespace;
-    castMessage.payloadType = CastMessage_PayloadType.JSON;
+    castMessage.payloadType = CastMessage_PayloadType.STRING;
     castMessage.payloadUtf8 = jsonEncode(payload);
 
     Uint8List bytes = castMessage.writeToBuffer();
