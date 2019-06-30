@@ -13,6 +13,7 @@ import 'package:dart_chromecast/casting/cast_session.dart';
 import 'package:dart_chromecast/casting/connection_channel.dart';
 import 'package:dart_chromecast/casting/heartbeat_channel.dart';
 import 'package:dart_chromecast/casting/media_channel.dart';
+import 'package:dart_chromecast/casting/text_channel.dart';
 import 'package:dart_chromecast/casting/receiver_channel.dart';
 import 'package:dart_chromecast/proto/cast_channel.pb.dart';
 import 'package:logging/logging.dart';
@@ -28,6 +29,7 @@ class CastSender extends Object {
   HeartbeatChannel _heartbeatChannel;
   ReceiverChannel _receiverChannel;
   MediaChannel _mediaChannel;
+  TextChannel _textChannel;
 
   bool connectionDidClose;
 
@@ -131,7 +133,11 @@ class CastSender extends Object {
       });
     }
   }
-
+  void sendText(String text){
+    _textChannel.sendTextMessage({
+      'msg': text
+    });
+  }
   void load(CastMedia media, {forceNext = true}) {
     loadPlaylist([media], forceNext: forceNext);
   }
