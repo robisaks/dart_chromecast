@@ -90,7 +90,12 @@ class CastSender extends Object {
     if (!connected) {
       return false;
     }
-
+    
+    _textChannel = TextChannel.Create(socket: _socket, sourceId: sourceId, destinationId: destinationId);
+    _textChannel.sendMessage({
+      'type': 'GET_STATUS'
+    });
+    
     _mediaChannel = MediaChannel.Create(socket: _socket, sourceId: sourceId, destinationId: destinationId);
     _mediaChannel.sendMessage({
       'type': 'GET_STATUS'
@@ -263,6 +268,11 @@ class CastSender extends Object {
         _connectionChannel = ConnectionChannel.create(_socket, sourceId: _castSession.sourceId, destinationId: _castSession.destinationId);
         _connectionChannel.sendMessage({
           'type': 'CONNECT'
+        });
+        
+        _textChannel = TextChannel.Create(socket: _socket, sourceId: sourceId, destinationId: destinationId);
+        _textChannel.sendMessage({
+          'type': 'GET_STATUS'
         });
         _mediaChannel = MediaChannel.Create(socket: _socket, sourceId: _castSession.sourceId, destinationId: _castSession.destinationId);
         _mediaChannel.sendMessage({
