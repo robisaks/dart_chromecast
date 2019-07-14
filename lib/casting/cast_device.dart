@@ -59,7 +59,9 @@ class CastDevice extends ChangeNotifier {
   }) {
     initDeviceInfo();
   }
-
+  
+  bool operator ==(o) => o is CastDevice && o.attr["id"] == attr["id"];
+  
   void initDeviceInfo() async {
     if (CastDeviceType.ChromeCast == deviceType) {
       if (null != attr && null != attr['fn']) {
